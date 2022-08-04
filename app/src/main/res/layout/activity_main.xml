@@ -4,15 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/main_screen_main_layout_padding"
     tools:context=".MainActivity">
 
+
+   <ImageView
+       android:id="@+id/iv7Min"
+       app:layout_constraintTop_toTopOf="parent"
+       android:src="@drawable/img_main_activity"
+       android:adjustViewBounds="true"
+       android:contentDescription="@string/start_image"
+       app:layout_constraintTop_toBottomOf="@+id/flStart"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/main_screen_iv_layout_height"/>
+
     <TextView
-        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/iv7Min"
+        app:layout_constraintBottom_toBottomOf="@id/flStart"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/_7_min_workout"
+        android:textColor="@color/secondary_color"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        />
+
+
+    <FrameLayout
+        android:id="@+id/flStart"
+        android:layout_marginTop="@dimen/main_screen_fl_margin_top"
+        app:layout_constraintTop_toBottomOf="@+id/iv7Min"
+        android:layout_width="@dimen/main_screen_fl_lay_width"
+        android:layout_height="@dimen/main_screen_fl_lay_height"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/item_circular_primary_color_border_ripple_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_start"
+            android:layout_gravity="center"
+            android:textSize="@dimen/main_screen_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/secondary_color"/>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
