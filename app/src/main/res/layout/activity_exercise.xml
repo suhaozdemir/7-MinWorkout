@@ -49,12 +49,11 @@
         android:progressDrawable="@drawable/circular_progress_bar"
         android:indeterminate="false"
         android:max="10"
-        android:progress="100"
         android:rotation="-90"/>
 
     <LinearLayout
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/activity_screen_ll_lay_width"
+        android:layout_height="@dimen/activity_screen_ll_lay_height"
         android:gravity="center"
         android:layout_gravity="center"
         android:background="@drawable/item_circular_primary_color_bg">
@@ -70,5 +69,48 @@
     </LinearLayout>
 
 </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flExerciseProgressBar"
+        android:layout_width="@dimen/activity_screen_fl_lay_width"
+        android:layout_height="@dimen/activity_screen_fl_layout_height"
+        android:background="@drawable/item_circular_primary_color_border"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarExercise">
+
+        <ProgressBar
+            android:id="@+id/exerciseProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/activity_screen_pb_lay_width"
+            android:layout_height="@dimen/activity_screen_pb_lay_height"
+            android:layout_gravity="center"
+            android:background="@drawable/circular_progress_bar_gray"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            android:indeterminate="false"
+            android:max="30"
+            android:rotation="-90"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/activity_screen_ll_lay_width"
+            android:layout_height="@dimen/activity_screen_ll_lay_height"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/item_circular_primary_color_bg">
+
+            <TextView
+                android:id="@+id/tvExerciseTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/activity_screen_tvTimer_text_size"
+                android:textStyle="bold"
+                tools:text="30"/>
+        </LinearLayout>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
