@@ -16,6 +16,9 @@ class ExerciseActivity : AppCompatActivity() {
     private var restProgress = 0
     private var exerciseProgress = 0
 
+    private var exerciseList : ArrayList<ExerciseModel>? = null
+    private var exerciseCurrentPosition = -1 //Because zeroth index is the first index of an ArrayList
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
@@ -23,6 +26,8 @@ class ExerciseActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbarExercise)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        exerciseList = Constants.defaultExerciseList()
 
         binding.toolbarExercise.setNavigationOnClickListener{
             onBackPressed()
@@ -41,9 +46,10 @@ class ExerciseActivity : AppCompatActivity() {
             }
             override fun onFinish() {
                 Toast.makeText(this@ExerciseActivity,
-                    "Starting your exercise",
+                    getString(R.string.starting_your_exercise),
                     Toast.LENGTH_SHORT
                 ).show()
+                exerciseCurrentPosition++
                 setupExerciseView()
             }
         }.start()
@@ -70,7 +76,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     private fun setupExerciseView(){
         binding.progressBar.visibility = View.GONE
-        binding.tvTitle.text = "Exercise Name"
+        binding.tvTitle.text = exerciseList!![exerciseCurrentPosition].name
         binding.flExerciseProgressBar.visibility = View.VISIBLE
         reset()
         setExerciseProgressBar()
