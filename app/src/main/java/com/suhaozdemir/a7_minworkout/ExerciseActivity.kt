@@ -64,21 +64,41 @@ class ExerciseActivity : AppCompatActivity() {
                 binding.tvExerciseTimer.text = (30 - exerciseProgress).toString()
             }
             override fun onFinish() {
-
+                if (exerciseCurrentPosition < exerciseList?.size!! - 1)
+                    setupRestView()
+                else
+                    Toast.makeText(
+                        this@ExerciseActivity,
+                        "Congratulations, you've completed the 7 minutes workout!",
+                        Toast.LENGTH_LONG,
+                    ).show()
             }
         }.start()
     }
 
     private fun setupRestView(){
+        binding.flProgressBar.visibility = View.VISIBLE
+        binding.tvTitle.visibility = View.VISIBLE
+        binding.tvExercise.visibility = View.INVISIBLE
+        binding.flExerciseProgressBar.visibility = View.INVISIBLE
+        binding.ivImage.visibility = View.INVISIBLE
+
         reset()
         setRestProgressBar()
     }
 
     private fun setupExerciseView(){
-        binding.progressBar.visibility = View.GONE
-        binding.tvTitle.text = exerciseList!![exerciseCurrentPosition].name
+        binding.flProgressBar.visibility = View.INVISIBLE
+        binding.tvTitle.visibility = View.INVISIBLE
+        binding.tvExercise.visibility = View.VISIBLE
         binding.flExerciseProgressBar.visibility = View.VISIBLE
+        binding.ivImage.visibility = View.VISIBLE
+
         reset()
+
+        exerciseList?.get(exerciseCurrentPosition)?.name.let { binding.tvExercise.text = it }
+        exerciseList?.get(exerciseCurrentPosition)?.let { binding.ivImage.setImageResource(it.img) }
+
         setExerciseProgressBar()
     }
 

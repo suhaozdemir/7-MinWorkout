@@ -5,4 +5,5 @@
     <string name="_7_min_workout">7-Min Workout</string>
     <string name="get_ready_for">GET READY FOR</string>
     <string name="starting_your_exercise">Starting your exercise</string>
+    <string name="exercise_name">ExerciseName</string>
 </resources>
