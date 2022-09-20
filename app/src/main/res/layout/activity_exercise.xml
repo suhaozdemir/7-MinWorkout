@@ -25,12 +25,12 @@
         android:textStyle="bold"
         android:textColor="@color/primary_color"
         android:layout_marginBottom="@dimen/activity_screen_tv_marginBottom"
-        app:layout_constraintBottom_toTopOf="@id/flProgressBar"
+        app:layout_constraintBottom_toTopOf="@id/flRestView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <FrameLayout
-        android:id="@+id/flProgressBar"
+        android:id="@+id/flRestView"
         android:layout_width="@dimen/activity_screen_fl_lay_width"
         android:layout_height="@dimen/activity_screen_fl_layout_height"
         android:background="@drawable/item_circular_primary_color_border"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvUpcomingExerciseName"
-        app:layout_constraintTop_toBottomOf="@id/flProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/flRestView"
         tools:visibility="visible" />
 
     <TextView

@@ -3,13 +3,18 @@ package com.suhaozdemir.a7_minworkout
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.suhaozdemir.a7_minworkout.databinding.ActivityExerciseBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ExerciseActivity : AppCompatActivity() {
+class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private lateinit var binding: ActivityExerciseBinding
+    private var textToSpeech: TextToSpeech? = null
 
     private var restTimer : CountDownTimer? = null
     private var exerciseTimer : CountDownTimer? = null
@@ -28,6 +33,8 @@ class ExerciseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         exerciseList = Constants.defaultExerciseList()
+
+        textToSpeech = TextToSpeech(this, this)
 
         binding.toolbarExercise.setNavigationOnClickListener{
             onBackPressed()
@@ -77,7 +84,7 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setupRestView(){
-        binding.flProgressBar.visibility = View.VISIBLE
+        binding.flRestView.visibility = View.VISIBLE
         binding.tvTitle.visibility = View.VISIBLE
         binding.tvExercise.visibility = View.INVISIBLE
         binding.flExerciseProgressBar.visibility = View.INVISIBLE
@@ -87,13 +94,16 @@ class ExerciseActivity : AppCompatActivity() {
 
         reset()
 
-        exerciseList?.get(exerciseCurrentPosition + 1)?.name.let { binding.tvUpcomingExerciseName.text = it}
+        exerciseList?.get(exerciseCurrentPosition + 1)?.name?.let {
+            binding.tvUpcomingExerciseName.text = it
+            speakOut(binding.tvUpcomingExercise.text.toString() + it)
+        }
 
         setRestProgressBar( )
     }
 
     private fun setupExerciseView(){
-        binding.flProgressBar.visibility = View.INVISIBLE
+        binding.flRestView.visibility = View.INVISIBLE
         binding.tvTitle.visibility = View.INVISIBLE
         binding.tvExercise.visibility = View.VISIBLE
         binding.flExerciseProgressBar.visibility = View.VISIBLE
@@ -103,7 +113,9 @@ class ExerciseActivity : AppCompatActivity() {
 
         reset()
 
-        exerciseList?.get(exerciseCurrentPosition)?.name.let { binding.tvExercise.text = it }
+        exerciseList?.get(exerciseCurrentPosition)?.name?.let {
+            binding.tvExercise.text = it
+            speakOut(it)}
         exerciseList?.get(exerciseCurrentPosition)?.let { binding.ivImage.setImageResource(it.img) }
 
         setExerciseProgressBar()
@@ -111,19 +123,44 @@ class ExerciseActivity : AppCompatActivity() {
 
 
     override fun onDestroy() {
-        super.onDestroy()
+
+        if (textToSpeech != null){
+            textToSpeech!!.stop()
+            textToSpeech!!.shutdown()
+        }
+
         reset()
+        super.onDestroy()
     }
 
     private fun reset(){
+
         if(restTimer != null){
             restTimer?.cancel()
             restProgress = 0
         }
+
         if(exerciseTimer != null){
             exerciseTimer?.cancel()
             exerciseProgress = 0
         }
+
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS){
+            val result = textToSpeech?.setLanguage(Locale.US)
+
+            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+                Log.e("TTS", "The Language specified is not supported!")
+            }else{
+                Log.e("TTS", "Initialization Failed!")
+            }
+        }
+    }
+
+    private fun speakOut(text:String){
+        textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
 }
