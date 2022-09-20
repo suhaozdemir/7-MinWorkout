@@ -82,9 +82,14 @@ class ExerciseActivity : AppCompatActivity() {
         binding.tvExercise.visibility = View.INVISIBLE
         binding.flExerciseProgressBar.visibility = View.INVISIBLE
         binding.ivImage.visibility = View.INVISIBLE
+        binding.tvUpcomingExercise.visibility = View.VISIBLE
+        binding.tvUpcomingExerciseName.visibility = View.VISIBLE
 
         reset()
-        setRestProgressBar()
+
+        exerciseList?.get(exerciseCurrentPosition + 1)?.name.let { binding.tvUpcomingExerciseName.text = it}
+
+        setRestProgressBar( )
     }
 
     private fun setupExerciseView(){
@@ -93,6 +98,8 @@ class ExerciseActivity : AppCompatActivity() {
         binding.tvExercise.visibility = View.VISIBLE
         binding.flExerciseProgressBar.visibility = View.VISIBLE
         binding.ivImage.visibility = View.VISIBLE
+        binding.tvUpcomingExercise.visibility = View.INVISIBLE
+        binding.tvUpcomingExerciseName.visibility = View.INVISIBLE
 
         reset()
 
