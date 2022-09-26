@@ -7,6 +7,7 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.suhaozdemir.a7_minworkout.databinding.ActivityExerciseBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,6 +24,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var exerciseList : ArrayList<ExerciseModel>? = null
     private var exerciseCurrentPosition = -1 //Because zeroth index is the first index of an ArrayList
+
+    private var exerciseStatusAdapter : ExerciseStatusAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,15 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         setupRestView()
+        setupExerciseStatusRecyclerView()
+    }
+
+    private fun setupExerciseStatusRecyclerView(){
+        binding.rvExerciseStatus.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        exerciseStatusAdapter = exerciseList?.let { ExerciseStatusAdapter(it) }
+        binding.rvExerciseStatus.adapter = exerciseStatusAdapter
     }
 
     private fun setRestProgressBar(){
@@ -87,7 +99,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding.flRestView.visibility = View.VISIBLE
         binding.tvTitle.visibility = View.VISIBLE
         binding.tvExercise.visibility = View.INVISIBLE
-        binding.flExerciseProgressBar.visibility = View.INVISIBLE
+        binding.flExerciseView.visibility = View.INVISIBLE
         binding.ivImage.visibility = View.INVISIBLE
         binding.tvUpcomingExercise.visibility = View.VISIBLE
         binding.tvUpcomingExerciseName.visibility = View.VISIBLE
@@ -106,7 +118,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding.flRestView.visibility = View.INVISIBLE
         binding.tvTitle.visibility = View.INVISIBLE
         binding.tvExercise.visibility = View.VISIBLE
-        binding.flExerciseProgressBar.visibility = View.VISIBLE
+        binding.flExerciseView.visibility = View.VISIBLE
         binding.ivImage.visibility = View.VISIBLE
         binding.tvUpcomingExercise.visibility = View.INVISIBLE
         binding.tvUpcomingExerciseName.visibility = View.INVISIBLE
