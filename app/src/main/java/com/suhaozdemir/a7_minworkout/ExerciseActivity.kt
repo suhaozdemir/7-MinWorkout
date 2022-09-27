@@ -68,7 +68,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     getString(R.string.starting_your_exercise),
                     Toast.LENGTH_SHORT
                 ).show()
+
                 exerciseCurrentPosition++
+                exerciseList?.get(exerciseCurrentPosition)?.isSelected = true
+                exerciseStatusAdapter?.notifyItemChanged(exerciseCurrentPosition)
                 setupExerciseView()
             }
         }.start()
@@ -83,6 +86,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding.tvExerciseTimer.text = (30 - exerciseProgress).toString()
             }
             override fun onFinish() {
+
+                exerciseList?.get(exerciseCurrentPosition)?.isSelected = false
+                exerciseList?.get(exerciseCurrentPosition)?.isCompleted = true
+                exerciseStatusAdapter?.notifyItemChanged(exerciseCurrentPosition)
+
                 if (exerciseCurrentPosition < exerciseList?.size!! - 1)
                     setupRestView()
                 else
