@@ -7,4 +7,13 @@
     <string name="starting_your_exercise">Starting your exercise</string>
     <string name="exercise_name">ExerciseName</string>
     <string name="upcoming_exercise">UPCOMING EXERCISE:</string>
+    <string name="end">END</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="you_have_done_the_workout">You have done the workout!</string>
+    <string name="finish">FINISH</string>
+    <string name="image">Image</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="quit_alert">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>

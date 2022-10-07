@@ -1,5 +1,7 @@
 package com.suhaozdemir.a7_minworkout
 
+import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suhaozdemir.a7_minworkout.databinding.ActivityExerciseBinding
+import com.suhaozdemir.a7_minworkout.databinding.DialogCustomBackConfirmationBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,11 +43,30 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         textToSpeech = TextToSpeech(this, this)
 
         binding.toolbarExercise.setNavigationOnClickListener{
-            onBackPressed()
+            customDialogForBackButton()
         }
 
         setupRestView()
         setupExerciseStatusRecyclerView()
+    }
+
+    private fun customDialogForBackButton(){
+        val customDialog = Dialog(this)
+        val dialogBinding = DialogCustomBackConfirmationBinding.inflate(layoutInflater)
+        customDialog.setContentView(dialogBinding.root)
+        customDialog.setCanceledOnTouchOutside(false)
+        dialogBinding.btnYes.setOnClickListener{
+            this@ExerciseActivity.finish()
+            customDialog.dismiss()
+        }
+        dialogBinding.btnNo.setOnClickListener {
+            customDialog.dismiss()
+        }
+        customDialog.show()
+    }
+
+    override fun onBackPressed() {
+        customDialogForBackButton()
     }
 
     private fun setupExerciseStatusRecyclerView(){
@@ -86,19 +108,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding.tvExerciseTimer.text = (30 - exerciseProgress).toString()
             }
             override fun onFinish() {
-
-                exerciseList?.get(exerciseCurrentPosition)?.isSelected = false
-                exerciseList?.get(exerciseCurrentPosition)?.isCompleted = true
-                exerciseStatusAdapter?.notifyItemChanged(exerciseCurrentPosition)
-
-                if (exerciseCurrentPosition < exerciseList?.size!! - 1)
+                if (exerciseCurrentPosition < exerciseList?.size!! - 1){
+                    exerciseList?.get(exerciseCurrentPosition)?.isSelected = false
+                    exerciseList?.get(exerciseCurrentPosition)?.isCompleted = true
+                    exerciseStatusAdapter?.notifyItemChanged(exerciseCurrentPosition)
                     setupRestView()
-                else
-                    Toast.makeText(
-                        this@ExerciseActivity,
-                        "Congratulations, you've completed the 7 minutes workout!",
-                        Toast.LENGTH_LONG,
-                    ).show()
+                }
+                else{
+                    finish()
+                    startActivity(Intent(this@ExerciseActivity, FinishActivity::class.java))
+                }
             }
         }.start()
     }

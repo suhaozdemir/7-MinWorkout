@@ -47,7 +47,7 @@ object Constants {
         exerciseList.add(tricepsDipOnChair)
 
         val plank = ExerciseModel(8,
-            "plank",
+            "Plank",
             R.drawable.ic_plank,
         )
         exerciseList.add(plank)
