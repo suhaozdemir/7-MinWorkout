@@ -34,7 +34,8 @@
     <FrameLayout
         android:id="@+id/flStart"
         android:layout_marginTop="@dimen/main_screen_fl_margin_top"
-        app:layout_constraintTop_toBottomOf="@+id/iv7Min"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="@dimen/main_screen_fl_lay_width"
         android:layout_height="@dimen/main_screen_fl_lay_height"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +50,27 @@
             android:textSize="@dimen/main_screen_text_size"
             android:textStyle="bold"
             android:textColor="@color/secondary_color"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flBMI"
+        app:layout_constraintTop_toBottomOf="@+id/flStart"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/item_circular_primary_color_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bmi"
+            android:layout_gravity="center"
+            android:textSize="@dimen/main_screen_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
     </FrameLayout>
 

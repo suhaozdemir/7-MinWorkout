@@ -16,4 +16,22 @@
     <string name="quit_alert">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="bmi">BMI</string>
+    <string name="calculate_bmi">CALCULATE BMI</string>
+    <string name="weight_in_kg">WEIGHT (in kg)</string>
+    <string name="height_in_cm">HEIGHT (in cm)</string>
+    <string name="your_bmi">YOUR BMI</string>
+    <string name="calculate">CALCULATE</string>
+    <string name="bmi_vsu">Very severely underweight</string>
+    <string name="bmi_eatmore">Oops! You really need to take better care of yourself! Eat more!</string>
+    <string name="bmi_su">Severely undeweight</string>
+    <string name="bmi_uw">Underweight</string>
+    <string name="bmi_n">Normal</string>
+    <string name="bmi_congrats">Congratulations! You are in a good shape!</string>
+    <string name="bmi_ow">Overweight</string>
+    <string name="bmi_workout">Oops! You really need to take care of yourself! Workout Now!</string>
+    <string name="bmi_actnow">OMG! You are in a very dangerous condition! Act now!</string>
+    <string name="bmi_obese3">Obese Class III (Very Severely obese)</string>
+    <string name="bmi_obese2">Obese Class II (Severely obese)</string>
+    <string name="bmi_obese1">Obese Class I (Moderately obsese)</string>
 </resources>
